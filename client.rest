@@ -2,7 +2,7 @@
 
 # RECADOS
 ###
-GET {{baseUrl}}/recados
+ um recado: 10GET {{baseUrl}}/recados
 ###
 GET {{baseUrl}}/recados/10
 ###
