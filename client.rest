@@ -1,6 +1,22 @@
-@baseUrl = http://localhost:3000/
+@baseUrl = http://localhost:3000
+
+### EXEMPLO DE ROTA
 ### AppControllerGetHello
 
 # @name AppControllerGetHello
 
 GET {{baseUrl}}
+
+### ConceitosManualController Home
+
+# @name ConceitosManualControllerHome
+
+GET {{baseUrl}}/conceitos-manual
+
+
+### ConceitosAutomaticoController Home
+
+# @name ConceitosAutomaticoControllerHome
+
+GET {{baseUrl}}/conceitos-automatico
+
