@@ -2,9 +2,12 @@
 
 # RECADOS
 ###
- um recado: 10GET {{baseUrl}}/recados
+GET {{baseUrl}}/recados
 ###
 GET {{baseUrl}}/recados/10
+###
+
+POST {{baseUrl}}/recadosEssa rota cria um recado
 ###
 
 ### EXEMPLO DE ROTA
