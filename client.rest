@@ -7,7 +7,13 @@ GET {{baseUrl}}/recados
 GET {{baseUrl}}/recados/10
 ###
 
-POST {{baseUrl}}/recadosEssa rota cria um recado
+POST {{baseUrl}}/recados
+Content-Type: application/json
+
+{
+  "recado": "Um recado qualquer",
+  "nova chave": "outro valor"
+}
 ###
 
 ### EXEMPLO DE ROTA
