@@ -16,6 +16,14 @@ Content-Type: application/json
 }
 ###
 
+PATCH  {{baseUrl}}/recados/10
+Content-Type: application/json
+
+{
+  "recado": "Um recado qualquer",
+  "nova chave": "outro valor"
+}
+
 ### EXEMPLO DE ROTA
 ### AppControllerGetHello
 
