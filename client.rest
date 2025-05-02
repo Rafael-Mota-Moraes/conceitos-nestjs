@@ -3,6 +3,13 @@
 # RECADOS
 ###
 GET {{baseUrl}}/recados
+
+###
+
+GET {{baseUrl}}/recados/
+?limit=10
+&offset=10
+
 ###
 GET {{baseUrl}}/recados/10
 ###
