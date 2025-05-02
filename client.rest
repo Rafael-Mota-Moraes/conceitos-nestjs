@@ -11,28 +11,34 @@ GET {{baseUrl}}/recados/
 &offset=10
 
 ###
-GET {{baseUrl}}/recados/10
+GET {{baseUrl}}/recados/2
 ###
 
 POST {{baseUrl}}/recados
 Content-Type: application/json
 
 {
-  "recado": "Um recado qualquer",
-  "nova chave": "outro valor"
+  "texto": "Novo Recado",
+  "de": "Joana",
+  "para": "João",
+  "lido": false,
+  "data": "2025-05-02T20:52:15.677Z"
 }
 ###
 
-PATCH  {{baseUrl}}/recados/10
+PATCH  {{baseUrl}}/recados/2
 Content-Type: application/json
 
 {
-  "recado": "Um recado qualquer",
-  "nova chave": "outro valor"
+  "texto": "Novo Recado atualizado",
+  "de": "Joana",
+  "para": "João",
+  "lido": false,
+  "data": "2025-05-02T20:52:15.677Z"
 }
 
 ###
-DELETE {{baseUrl}}/recados/10
+DELETE {{baseUrl}}/recados/2
 
 ### EXEMPLO DE ROTA
 ### AppControllerGetHello
