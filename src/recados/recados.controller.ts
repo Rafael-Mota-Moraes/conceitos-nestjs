@@ -10,16 +10,20 @@ import {
   Post,
   Query,
 } from '@nestjs/common';
+import { RecadosService } from './recados.service';
 
 @Controller('recados')
 export class RecadosController {
+  constructor(private readonly recadosService: RecadosService) {}
+
   // encontrar todos os recados
 
   @HttpCode(HttpStatus.OK)
   @Get()
   findAll(@Query() pagination: any) {
     const { limit = 10, offset = 10 } = pagination;
-    return `Essa rota retorna todos os recados: limit:${limit} offset:${offset}`;
+    // return `Essa rota retorna todos os recados: limit:${limit} offset:${offset}`;
+    return this.recadosService.hello();
   }
 
   // encontra um recado
