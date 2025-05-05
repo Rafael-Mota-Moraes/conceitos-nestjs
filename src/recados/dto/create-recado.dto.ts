@@ -1,5 +1,26 @@
+import {
+  IsBoolean,
+  IsNotEmpty,
+  IsNumber,
+  IsString,
+  MaxLength,
+  MinLength,
+} from 'class-validator';
+
 export class CreateRecadoDto {
+  @IsString({
+    message: 'Texto precisa ser do tipo string',
+  })
+  @IsNotEmpty()
+  @MinLength(5)
+  @MaxLength(255)
   readonly texto: string;
+
+  @IsString()
+  @IsNotEmpty()
+  @MinLength(2)
+  @MaxLength(50)
   readonly de: string;
+
   readonly para: string;
 }
