@@ -20,14 +20,11 @@ Content-Type: application/json
 {
   "texto": "Um texto longo",
   "de": "Joana",
-  "para": "João",
-  "lido": false,
-  "data": "2025-05-02T20:52:15.677Z",
-  "Bla bla": 123
+  "para": "João"
 }
 ###
 
-PATCH  {{baseUrl}}/recados/2
+PATCH  {{baseUrl}}/recados/ABC
 Content-Type: application/json
 
 {
