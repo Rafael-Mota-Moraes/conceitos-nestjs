@@ -43,6 +43,7 @@ export class RecadosController {
   update(@Param('id') id: string, @Body() updateRecadoDto: UpdateRecadoDto) {
     return this.recadosService.update(id, updateRecadoDto);
   }
+
   @Delete(':id')
   remove(@Param('id') id: string) {
     return this.recadosService.remove(id);
