@@ -24,12 +24,10 @@ Content-Type: application/json
 }
 ###
 
-PATCH  {{baseUrl}}/recados/ABC
+PATCH  {{baseUrl}}/recados/3
 Content-Type: application/json
 
 {
-  "texto": "Akkkkk",
-  "lido": true
 }
 
 ###
