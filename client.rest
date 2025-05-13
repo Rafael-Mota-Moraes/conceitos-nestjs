@@ -78,12 +78,13 @@ Content-Type: application/json
 }
 ###
 
-PATCH  {{baseUrl}}/pessoas/3
+PATCH  {{baseUrl}}/pessoas/12
 Content-Type: application/json
 
 {
+  "nome": "outro"
 }
 
 ###
-DELETE {{baseUrl}}/pessoas/2
+DELETE {{baseUrl}}/pessoas/9
 
