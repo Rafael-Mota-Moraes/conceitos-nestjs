@@ -19,8 +19,9 @@ Content-Type: application/json
 
 {
   "texto": "Um texto longo",
-  "de": "Joana",
-  "para": "João"
+  "deId": 12,
+  "paraId": 12
+  
 }
 ###
 
