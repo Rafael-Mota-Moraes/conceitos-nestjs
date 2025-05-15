@@ -25,11 +25,14 @@ Content-Type: application/json
 }
 ###
 
-PATCH  {{baseUrl}}/recados/3
+PATCH  {{baseUrl}}/recados/7
 Content-Type: application/json
 
 {
+  "texto": "texto editado",
+  "lido": true
 }
+
 
 ###
 DELETE {{baseUrl}}/recados/2
