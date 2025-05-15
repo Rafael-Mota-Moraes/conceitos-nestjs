@@ -37,7 +37,6 @@ export class RecadosService {
   }
 
   async findOne(id: number) {
-    // const recado = this.recados.find((item) => item.id === +id);
     const recado = await this.recadoRepository.findOne({
       where: {
         id: id,
