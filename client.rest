@@ -11,7 +11,7 @@ GET {{baseUrl}}/recados/
 &offset=0
 
 ###
-GET {{baseUrl}}/recados/2
+GET {{baseUrl}}/recados/22/
 ###
 
 POST {{baseUrl}}/recados
