@@ -4,14 +4,14 @@ import { Observable, tap } from 'rxjs';
 export class TimingConnectionInterceptor implements NestInterceptor {
   async intercept(context: ExecutionContext, next: CallHandler<any>) {
     const now = Date.now();
-    console.log('TimingConnectionInterceptor executado');
-
-    await new Promise((resolve) => setTimeout(resolve, 3000));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     return next.handle().pipe(
       tap(() => {
         const elapsed = Date.now();
-        console.log(`Terminou de executar ${elapsed - now}`);
+        console.log(
+          `TimingConnectionInterceptor terminou de executar ${elapsed - now}`,
+        );
       }),
     );
   }

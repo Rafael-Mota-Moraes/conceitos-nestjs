@@ -19,6 +19,7 @@ import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
+import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
 
 @UsePipes(ParseIntIdPipe)
 @Controller('recados')
@@ -27,7 +28,7 @@ export class RecadosController {
 
   // encontrar todos os recados
 
-  @UseInterceptors(TimingConnectionInterceptor)
+  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   @HttpCode(HttpStatus.OK)
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {
@@ -37,6 +38,7 @@ export class RecadosController {
   }
 
   // encontra um recado
+  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.recadosService.findOne(id);
