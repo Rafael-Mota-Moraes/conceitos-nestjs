@@ -2,10 +2,12 @@ import {
   BadRequestException,
   CallHandler,
   ExecutionContext,
+  Injectable,
   NestInterceptor,
 } from '@nestjs/common';
 import { of, tap } from 'rxjs';
 
+@Injectable()
 export class SimpleCacheInterceptor implements NestInterceptor {
   private readonly cache = new Map();
 

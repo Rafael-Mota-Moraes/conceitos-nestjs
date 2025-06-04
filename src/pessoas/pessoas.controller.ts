@@ -22,7 +22,7 @@ export class PessoasController {
     return this.pessoasService.create(createPessoaDto);
   }
 
-  @UseInterceptors(AddHeaderInterceptor)
+  // @UseInterceptors(AddHeaderInterceptor)
   @Get()
   findAll() {
     return this.pessoasService.findAll();
