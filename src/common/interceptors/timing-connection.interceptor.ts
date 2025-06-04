@@ -9,9 +9,6 @@ export class TimingConnectionInterceptor implements NestInterceptor {
     return next.handle().pipe(
       tap(() => {
         const elapsed = Date.now();
-        console.log(
-          `TimingConnectionInterceptor terminou de executar ${elapsed - now}`,
-        );
       }),
     );
   }
