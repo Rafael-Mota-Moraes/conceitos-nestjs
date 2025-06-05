@@ -10,6 +10,7 @@ import {
   Patch,
   Post,
   Query,
+  Req,
   UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
@@ -23,19 +24,20 @@ import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling
 import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
+import { Request } from 'express';
 
 @UsePipes(ParseIntIdPipe)
-@UseInterceptors(AuthTokenInterceptor)
+// @UseInterceptors(AuthTokenInterceptor)
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
   // encontrar todos os recados
 
-  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   @HttpCode(HttpStatus.OK)
   @Get()
-  findAll(@Query() paginationDto: PaginationDto) {
+  findAll(@Query() paginationDto: PaginationDto, @Req() req: Request) {
+    console.log('RecadosController', req['user']);
     const { limit = 10, offset = 10 } = paginationDto;
     // return `Essa rota retorna todos os recados: limit:${limit} offset:${offset}`;
     return this.recadosService.findAll(paginationDto);
