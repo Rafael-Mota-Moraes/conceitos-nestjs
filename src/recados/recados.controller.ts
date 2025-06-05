@@ -1,4 +1,5 @@
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -40,7 +41,9 @@ export class RecadosController {
     console.log('RecadosController', req['user']);
     const { limit = 10, offset = 10 } = paginationDto;
     // return `Essa rota retorna todos os recados: limit:${limit} offset:${offset}`;
-    return this.recadosService.findAll(paginationDto);
+
+    throw new BadRequestException('Internal server error');
+    // return this.recadosService.findAll(paginationDto);
   }
 
   // encontra um recado
