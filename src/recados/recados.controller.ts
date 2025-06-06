@@ -12,6 +12,7 @@ import {
   Post,
   Query,
   Req,
+  UseGuards,
   UseInterceptors,
   UsePipes,
 } from '@nestjs/common';
@@ -26,24 +27,22 @@ import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.inter
 import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
 import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
 import { Request } from 'express';
+import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
 
 @UsePipes(ParseIntIdPipe)
-// @UseInterceptors(AuthTokenInterceptor)
 @Controller('recados')
 export class RecadosController {
   constructor(private readonly recadosService: RecadosService) {}
 
   // encontrar todos os recados
 
-  @HttpCode(HttpStatus.OK)
   @Get()
+  @UseGuards(IsAdminGuard)
   findAll(@Query() paginationDto: PaginationDto, @Req() req: Request) {
-    console.log('RecadosController', req['user']);
     const { limit = 10, offset = 10 } = paginationDto;
     // return `Essa rota retorna todos os recados: limit:${limit} offset:${offset}`;
 
-    throw new BadRequestException('Internal server error');
-    // return this.recadosService.findAll(paginationDto);
+    return this.recadosService.findAll(paginationDto);
   }
 
   // encontra um recado
