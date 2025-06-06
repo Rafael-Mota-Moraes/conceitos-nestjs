@@ -15,7 +15,6 @@ export class AddHeaderInterceptor implements NestInterceptor {
     const response = context.switchToHttp().getResponse();
 
     const recado = await this.recadosService.findOne(30);
-    console.log(recado);
 
     response.setHeader('X-Custom-Header', 'O valor do cabeçalho');
 

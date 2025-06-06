@@ -3,8 +3,6 @@ import { NextFunction, Request, Response } from 'express';
 
 export class SimpleMiddleware implements NestMiddleware {
   use(req: Request, res: Response, next: NextFunction) {
-    console.log('Olá SimpleMiddleware');
-
     const authorization = req.headers?.authorization;
 
     if (authorization) {

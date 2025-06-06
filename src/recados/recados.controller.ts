@@ -23,9 +23,6 @@ import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { TimingConnectionInterceptor } from 'src/common/interceptors/timing-connection.interceptor';
 import { ErrorHandlingInterceptor } from 'src/common/interceptors/error-handling.interceptor';
-import { ChangeDataInterceptor } from 'src/common/interceptors/change-data.interceptor';
-import { AddHeaderInterceptor } from 'src/common/interceptors/add-header.interceptor';
-import { AuthTokenInterceptor } from 'src/common/interceptors/auth-token.interceptor';
 import { Request } from 'express';
 import { IsAdminGuard } from 'src/common/guards/is-admin.guard';
 
@@ -37,16 +34,12 @@ export class RecadosController {
   // encontrar todos os recados
 
   @Get()
-  @UseGuards(IsAdminGuard)
-  findAll(@Query() paginationDto: PaginationDto, @Req() req: Request) {
+  findAll(@Query() paginationDto: PaginationDto) {
     const { limit = 10, offset = 10 } = paginationDto;
-    // return `Essa rota retorna todos os recados: limit:${limit} offset:${offset}`;
 
     return this.recadosService.findAll(paginationDto);
   }
 
-  // encontra um recado
-  @UseInterceptors(TimingConnectionInterceptor, ErrorHandlingInterceptor)
   @Get(':id')
   findOne(@Param('id') id: number) {
     return this.recadosService.findOne(id);

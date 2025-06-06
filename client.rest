@@ -36,7 +36,7 @@ Content-Type: application/json
 
 
 ###
-DELETE {{baseUrl}}/recados/2
+DELETE {{baseUrl}}/recados/21
 
 ### EXEMPLO DE ROTA
 ### AppControllerGetHello
