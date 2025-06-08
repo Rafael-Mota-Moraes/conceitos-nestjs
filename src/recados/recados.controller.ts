@@ -18,11 +18,15 @@ import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { Request } from 'express';
 import { UrlParam } from 'src/common/params/url-param.decorator';
 import { ReqDataParam } from 'src/common/params/req-data-param.decorator';
+import { RecadosUtils } from './recados.utils';
 
 @UsePipes(ParseIntIdPipe)
 @Controller('recados')
 export class RecadosController {
-  constructor(private readonly recadosService: RecadosService) {}
+  constructor(
+    private readonly recadosService: RecadosService,
+    private readonly recadosUtils: RecadosUtils,
+  ) {}
 
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {
@@ -33,6 +37,8 @@ export class RecadosController {
 
   @Get(':id')
   findOne(@Param('id') id: number) {
+    console.log(this.recadosUtils.inverteString('rafael'));
+
     return this.recadosService.findOne(id);
   }
 
