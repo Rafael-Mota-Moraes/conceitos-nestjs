@@ -3,6 +3,7 @@ import {
   Controller,
   Delete,
   Get,
+  Inject,
   Param,
   Patch,
   Post,
@@ -15,6 +16,7 @@ import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
 import { RecadosUtils } from './recados.utils';
+import { SERVER_NAME } from 'src/common/constants/server-name.constant';
 
 @UsePipes(ParseIntIdPipe)
 @Controller('recados')
@@ -22,12 +24,14 @@ export class RecadosController {
   constructor(
     private readonly recadosService: RecadosService,
     private readonly recadosUtils: RecadosUtils,
+    @Inject(SERVER_NAME)
+    private readonly serverName: string,
   ) {}
 
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {
     const { limit = 10, offset = 10 } = paginationDto;
-
+    console.log(this.serverName);
     return this.recadosService.findAll(paginationDto);
   }
 
