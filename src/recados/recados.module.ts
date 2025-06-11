@@ -5,7 +5,14 @@ import { TypeOrmModule } from '@nestjs/typeorm';
 import { Recado } from './entities/recado.entity';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
 import { RecadosUtils, RecadosUtilsMock } from './recados.utils';
-import { SERVER_NAME } from 'src/common/constants/server-name.constant';
+import {
+  ONLY_LOWERCASE_LETTERS_REGEX,
+  REMOVE_SPACES_REGEX,
+  SERVER_NAME,
+} from 'src/recados/recados.constant';
+import { RegexProtocol } from 'src/common/regex/regex-protocol.regex';
+import { RemoveSpacesRegex } from 'src/common/regex/remove-spaces.regex';
+import { OnlyLowerCaseLettersRegex } from 'src/common/regex/only-lowercase-letters.regex';
 
 @Module({
   imports: [
@@ -21,7 +28,15 @@ import { SERVER_NAME } from 'src/common/constants/server-name.constant';
     },
     {
       provide: SERVER_NAME,
-      useValue: 'NestJS',
+      useValue: 'Servidor NestJS',
+    },
+    {
+      provide: ONLY_LOWERCASE_LETTERS_REGEX,
+      useClass: OnlyLowerCaseLettersRegex,
+    },
+    {
+      provide: REMOVE_SPACES_REGEX,
+      useClass: RemoveSpacesRegex,
     },
   ],
   exports: [RecadosUtils],
