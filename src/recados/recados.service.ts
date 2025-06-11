@@ -22,7 +22,6 @@ export class RecadosService {
   }
 
   async findAll(paginationDto?: PaginationDto) {
-    console.log(this.recadosUtils.inverteString('rafael'));
     const { limit = 10, offset = 10 } = paginationDto ?? {};
 
     const recados = await this.recadoRepository.find({
