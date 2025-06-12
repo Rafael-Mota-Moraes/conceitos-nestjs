@@ -2,6 +2,7 @@ import {
   ConflictException,
   Injectable,
   NotFoundException,
+  Scope,
 } from '@nestjs/common';
 import { CreatePessoaDto } from './dto/create-pessoa.dto';
 import { UpdatePessoaDto } from './dto/update-pessoa.dto';
@@ -11,10 +12,15 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class PessoasService {
+  private count = 0;
+
   constructor(
     @InjectRepository(Pessoa)
     private readonly pessoaRepository: Repository<Pessoa>,
-  ) {}
+  ) {
+    this.count++;
+    console.log(`PessoaService foi iniciado ${this.count}`);
+  }
 
   async create(createPessoaDto: CreatePessoaDto) {
     try {
@@ -46,6 +52,9 @@ export class PessoasService {
   }
 
   async findOne(id: number) {
+    this.count++;
+    console.log(`PessoasService: ${this.count} - findOne`);
+
     const person = await this.pessoaRepository.findOneBy({
       id,
     });

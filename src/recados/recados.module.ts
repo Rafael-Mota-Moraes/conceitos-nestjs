@@ -11,10 +11,6 @@ import { MyDynamicModule } from 'src/my-dynamic/my-dynamic.module';
   imports: [
     TypeOrmModule.forFeature([Recado]),
     forwardRef(() => PessoasModule),
-    MyDynamicModule.register({
-      apiKey: '123',
-      apiUrl: 'localhost',
-    }),
   ],
   controllers: [RecadosController],
   providers: [RecadosService, RecadosUtils],

@@ -15,21 +15,10 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
-import {
-  MY_DYNAMIC_CONFIG,
-  MyDynamicModuleConfigs,
-} from 'src/my-dynamic/my-dynamic.module';
-
 @UsePipes(ParseIntIdPipe)
 @Controller('recados')
 export class RecadosController {
-  constructor(
-    private readonly recadosService: RecadosService,
-    @Inject(MY_DYNAMIC_CONFIG)
-    private readonly myDynamicConfigs: MyDynamicModuleConfigs,
-  ) {
-    console.log(myDynamicConfigs);
-  }
+  constructor(private readonly recadosService: RecadosService) {}
 
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {

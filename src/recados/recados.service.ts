@@ -1,4 +1,4 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import { Injectable, NotFoundException, Scope } from '@nestjs/common';
 import { Recado } from './entities/recado.entity';
 import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
@@ -8,14 +8,19 @@ import { PessoasService } from 'src/pessoas/pessoas.service';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { RecadosUtils } from './recados.utils';
 
-@Injectable()
+@Injectable({ scope: Scope.DEFAULT })
 export class RecadosService {
+  private count = 0;
+
   constructor(
     @InjectRepository(Recado)
     private readonly recadoRepository: Repository<Recado>,
     private readonly pessoasService: PessoasService,
     private readonly recadosUtils: RecadosUtils,
-  ) {}
+  ) {
+    this.count++;
+    console.log(`RecadosService ${this.count}`);
+  }
 
   throwNotFoundError() {
     throw new NotFoundException('Recado não encontrado');
