@@ -15,28 +15,24 @@ import { CreateRecadoDto } from './dto/create-recado.dto';
 import { UpdateRecadoDto } from './dto/update-recado.dto';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { ParseIntIdPipe } from 'src/common/pipes/parse-int-id.pipe';
-import { RecadosUtils } from './recados.utils';
-import { RegexProtocol } from 'src/common/regex/regex-protocol.regex';
 import {
-  ONLY_LOWERCASE_LETTERS_REGEX,
-  REMOVE_SPACES_REGEX,
-} from './recados.constant';
+  MY_DYNAMIC_CONFIG,
+  MyDynamicModuleConfigs,
+} from 'src/my-dynamic/my-dynamic.module';
 
 @UsePipes(ParseIntIdPipe)
 @Controller('recados')
 export class RecadosController {
   constructor(
     private readonly recadosService: RecadosService,
-    private readonly recadosUtils: RecadosUtils,
-    @Inject(REMOVE_SPACES_REGEX)
-    private readonly removeSpacesRegex: RegexProtocol,
-    @Inject(ONLY_LOWERCASE_LETTERS_REGEX)
-    private readonly onlyLowerCaseLetters: RegexProtocol,
-  ) {}
+    @Inject(MY_DYNAMIC_CONFIG)
+    private readonly myDynamicConfigs: MyDynamicModuleConfigs,
+  ) {
+    console.log(myDynamicConfigs);
+  }
 
   @Get()
   findAll(@Query() paginationDto: PaginationDto) {
-    console.log(this.onlyLowerCaseLetters.execute('REMOVE OS ESPACOS'));
     const { limit = 10, offset = 10 } = paginationDto;
     return this.recadosService.findAll(paginationDto);
   }
