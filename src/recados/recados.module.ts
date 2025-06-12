@@ -33,8 +33,10 @@ import { RemoveSpacesRegex } from 'src/common/regex/remove-spaces.regex';
     },
     {
       provide: ONLY_LOWERCASE_LETTERS_REGEX,
-      useFactory: (regexFactory: RegexFactory) => {
-        // Outras lógicas...
+      useFactory: async (regexFactory: RegexFactory) => {
+        console.log('Vou aguardar a Promise ser resolvida');
+        await new Promise((resolve) => setTimeout(resolve, 3000));
+        console.log('A promise foi resolvida');
 
         return regexFactory.create('OnlyLowerCaseLettersRegex');
       },
