@@ -4,12 +4,14 @@ import { AppService } from './app.service';
 import { RecadosModule } from 'src/recados/recados.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { PessoasModule } from 'src/pessoas/pessoas.module';
-import { ConfigModule } from '@nestjs/config';
+import { ConfigModule, ConfigService } from '@nestjs/config';
 import * as Joi from '@hapi/joi';
+import appConfig from './app.config';
 
 @Module({
   imports: [
     ConfigModule.forRoot({
+      load: [appConfig],
       validationSchema: Joi.object({
         DATABASE_TYPE: Joi.required(),
         DATABASE_HOST: Joi.required(),
@@ -21,15 +23,23 @@ import * as Joi from '@hapi/joi';
         DATABASE_SYNCHRONIZE: Joi.number().min(0).max(1).default(0),
       }),
     }),
-    TypeOrmModule.forRoot({
-      type: process.env.DATABASE_TYPE as 'postgres',
-      host: process.env.DATABASE_HOST,
-      port: Number(process.env.DATABASE_PORT),
-      username: process.env.DATABASE_USERNAME,
-      database: process.env.DATABASE_DATABASE,
-      password: process.env.DATABASE_PASSWORD,
-      autoLoadEntities: Boolean(process.env.DATABASE_AUTO_LOAD_ENTITIES),
-      synchronize: Boolean(process.env.DATABASE_SYNCHRONIZE),
+    TypeOrmModule.forRootAsync({
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        return {
+          type: configService.get<'postgres'>('database.type'),
+          host: configService.get<string>('database.host'),
+          port: configService.get<number>('database.port'),
+          username: configService.get<string>('database.username'),
+          database: configService.get<string>('database.database'),
+          password: configService.get<string>('database.password'),
+          autoLoadEntities: configService.get<boolean>(
+            'database.autoLoadEntities',
+          ),
+          synchronize: configService.get<boolean>('database.synchronize'),
+        };
+      },
     }),
     RecadosModule,
     PessoasModule,
