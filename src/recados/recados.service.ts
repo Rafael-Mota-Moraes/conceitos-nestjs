@@ -7,19 +7,20 @@ import { Repository } from 'typeorm';
 import { PessoasService } from 'src/pessoas/pessoas.service';
 import { PaginationDto } from 'src/common/dto/pagination.dto';
 import { RecadosUtils } from './recados.utils';
+import { ConfigService } from '@nestjs/config';
 
 @Injectable({ scope: Scope.DEFAULT })
 export class RecadosService {
-  private count = 0;
-
   constructor(
     @InjectRepository(Recado)
     private readonly recadoRepository: Repository<Recado>,
     private readonly pessoasService: PessoasService,
-    private readonly recadosUtils: RecadosUtils,
+    private readonly configService: ConfigService<{
+      DATABASE_USERNAME: string;
+    }>,
   ) {
-    this.count++;
-    console.log(`RecadosService ${this.count}`);
+    const databaseUsername = this.configService.get('DATABASE_USERNAME');
+    console.log(databaseUsername);
   }
 
   throwNotFoundError() {
